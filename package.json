@@ -2,7 +2,7 @@
   "name": "summarize",
   "packageManager": "yarn@4.12.0",
   "scripts": {
-    "start": "node summarize.ts"
+    "start": "node src/summarize.ts"
   },
   "type": "module",
   "dependencies": {
