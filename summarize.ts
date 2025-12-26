@@ -6,6 +6,6 @@ if (!response.ok) {
 }
 
 const content = await response.text();
-console.log(content);
+console.log(content.substring(0, 2000));
 
 export {};
