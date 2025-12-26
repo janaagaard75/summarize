@@ -1,5 +1,6 @@
 import { JSDOM } from "jsdom";
 import { Readability } from "@mozilla/readability";
+import { summarizeWithOpenRouter } from "./summarizeWithOpenRouter.js";
 
 const url = "https://henrikleth.com/ironman/";
 
@@ -21,10 +22,15 @@ async function main() {
     return;
   }
 
-  console.log("Successfully extracted by Readability:\n");
-  console.log(article.title);
-  console.log();
-  console.log(article.textContent?.substring(0, 1_000));
+  console.log("Successfully extracted by Readability.");
+
+  const summary = await summarizeWithOpenRouter(
+    article.textContent ?? "",
+    "google/gemini-2.5-flash",
+  );
+
+  console.log(summary);
+  console.log(`Character count: ${summary.length}`);
 }
 
 main().catch((err) => {
