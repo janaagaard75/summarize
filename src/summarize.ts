@@ -21,14 +21,15 @@ const main = async () => {
   const dom = new JSDOM(html, { url: url });
   const reader = new Readability(dom.window.document);
   const article = reader.parse();
+  const textContent = article?.textContent?.trim();
 
-  if (article === null) {
+  if (textContent === undefined || textContent === "") {
     console.log(html.substring(0, 1_000));
     throw new Error(`Could not extract the content of ${url}.`);
   }
 
   const summary = await summarizeWithOpenRouter(
-    article.textContent ?? "",
+    textContent,
     "google/gemini-2.5-flash",
   );
 
