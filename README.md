@@ -4,7 +4,7 @@ The `summarize` script returns a summary of the URL provided as a parameter. Ext
 
 Example
 
-```bash
+```text
 $ ./summarize https://react.dev/learn/you-might-not-need-an-effect
 React Effects should primarily synchronize components with external systems. Avoid unnecessary Effects for data transformation, event handling, or state adjustments within React, as these can lead to inefficiencies and bugs.
 Character count: 224.
