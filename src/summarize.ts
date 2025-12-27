@@ -4,7 +4,7 @@ import { summarizeWithOpenRouter } from "./summarizeWithOpenRouter.js";
 
 const url = "https://henrikleth.com/ironman/";
 
-async function main() {
+const main = async () => {
   const response = await fetch(url);
   if (!response.ok) {
     throw new Error(`Failed to fetch the webpage: ${response.statusText}.`);
@@ -31,7 +31,7 @@ async function main() {
 
   console.log(summary);
   console.log(`Character count: ${summary.length}`);
-}
+};
 
 main().catch((err) => {
   console.error(err);
