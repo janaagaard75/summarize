@@ -12,14 +12,24 @@ export const summarizeWithOpenRouter = async (
     baseURL: "https://openrouter.ai/api/v1",
   });
 
-  const prompt =
-    "Summarize the following news article in a few sentences with a maximum of 300 characters. Avoid line breaks and markdown formatting. Maintain a neutral and informative tone, focusing on the main message without unnecessary details. Do not translate the article to English, but keep the summary in the same language as the article. It is important that the summary is at most 300 characters long. Here is the text:\n\n";
+  // Using value slightly below 300 to account for any minor discrepancies in character counting.
+  const maxLength = 280;
 
-  const completion = await openai.completions.create({
+  const completion = await openai.chat.completions.create({
     model: model,
-    prompt: `${prompt}\n\n${articleText}`,
+    messages: [
+      {
+        role: "system",
+        content: `You are a concise news summarizer. IMPORTANT: Your response must be EXACTLY under ${maxLength} characters. No exceptions.`,
+      },
+      {
+        role: "user",
+        content: `Summarize this news article in 1-2 sentences. Maximum ${maxLength} characters. No line breaks, no markdown. Neutral tone. Same language as the article.\n\nArticle:\n${articleText}`,
+      },
+    ],
+    temperature: 0.5,
   });
 
-  const summary = completion.choices[0]?.text.trim() ?? "";
+  const summary = completion.choices[0]?.message.content?.trim() ?? "";
   return summary;
 };
