@@ -2,10 +2,16 @@ import { JSDOM } from "jsdom";
 import { Readability } from "@mozilla/readability";
 import { summarizeWithOpenRouter } from "./summarizeWithOpenRouter.js";
 
-const url = "https://henrikleth.com/ironman/";
+const url = process.argv[2];
+
+if (url === undefined) {
+  console.error("Please provide the URL of the page to summarize.");
+  process.exit(1);
+}
 
 const main = async () => {
   const response = await fetch(url);
+
   if (!response.ok) {
     throw new Error(`Failed to fetch ${url}: ${response.statusText}`);
   }
