@@ -2,12 +2,18 @@ import { JSDOM } from "jsdom";
 import { Readability } from "@mozilla/readability";
 import { summarizeWithOpenRouter } from "./summarizeWithOpenRouter.js";
 
-const url = "https://henrikleth.com/ironman/";
+const url = process.argv[2];
 
-async function main() {
+if (url === undefined) {
+  console.error("Please provide the URL of the page to summarize.");
+  process.exit(1);
+}
+
+const main = async () => {
   const response = await fetch(url);
+
   if (!response.ok) {
-    throw new Error(`Failed to fetch the webpage: ${response.statusText}.`);
+    throw new Error(`Failed to fetch ${url}: ${response.statusText}`);
   }
 
   const html = await response.text();
@@ -15,27 +21,23 @@ async function main() {
   const dom = new JSDOM(html, { url: url });
   const reader = new Readability(dom.window.document);
   const article = reader.parse();
+  const textContent = article?.textContent?.trim();
 
-  if (article === null) {
-    console.error("Readability could not extract an article from the page.");
+  if (textContent === undefined || textContent === "") {
     console.log(html.substring(0, 1_000));
-    return;
+    throw new Error(`Could not extract the content of ${url}.`);
   }
 
-  console.log("Successfully extracted by Readability.");
-
   const summary = await summarizeWithOpenRouter(
-    article.textContent ?? "",
+    textContent,
     "google/gemini-2.5-flash",
   );
 
   console.log(summary);
-  console.log(`Character count: ${summary.length}`);
-}
+  console.log(`Character count: ${summary.length}.`);
+};
 
 main().catch((err) => {
   console.error(err);
   process.exitCode = 1;
 });
-
-export {};
