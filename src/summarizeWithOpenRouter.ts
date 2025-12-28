@@ -3,6 +3,7 @@ import { getEnvironmentVariableValue } from "./getEnvironmentVariableValue";
 
 export const summarizeWithOpenRouter = async (
   articleText: string,
+  maxLength: number,
   model: "google/gemini-2.5-flash" | "openai/gpt-4o",
 ): Promise<string> => {
   const openRouterApiKey = getEnvironmentVariableValue("OPEN_ROUTER_API_KEY");
@@ -11,9 +12,6 @@ export const summarizeWithOpenRouter = async (
     apiKey: openRouterApiKey,
     baseURL: "https://openrouter.ai/api/v1",
   });
-
-  // Using value slightly below 300 to account for any minor discrepancies in character counting.
-  const maxLength = 280;
 
   const completion = await openai.chat.completions.create({
     model: model,

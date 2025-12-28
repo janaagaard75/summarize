@@ -1,8 +1,8 @@
 {
   "name": "summarize",
-  "packageManager": "yarn@4.12.0",
+  "packageManager": "bun@1.3.4",
   "scripts": {
-    "summarize": "tsx src/summarize.ts"
+    "build": "bun build --bytecode --compile --minify --sourcemap ./src/summarize.ts --outfile summarize"
   },
   "type": "module",
   "dependencies": {
