@@ -9,3 +9,7 @@ $ ./summarize https://react.dev/learn/you-might-not-need-an-effect
 React Effects should primarily synchronize components with external systems. Avoid unnecessary Effects for data transformation, event handling, or state adjustments within React, as these can lead to inefficiencies and bugs.
 Character count: 224.
 ```
+
+## Run commands
+
+`bun run build`: Build a standalone executable.

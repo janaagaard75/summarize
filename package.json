@@ -2,7 +2,7 @@
   "name": "summarize",
   "packageManager": "bun@1.3.4",
   "scripts": {
-    "summarize": "tsx src/summarize.ts"
+    "build": "bun build ./src/summarize.ts --compile --outfile summarize"
   },
   "type": "module",
   "dependencies": {
