@@ -30,6 +30,7 @@ const main = async () => {
 
   const summary = await summarizeWithOpenRouter(
     textContent,
+    280,
     "google/gemini-2.5-flash",
   );
 
