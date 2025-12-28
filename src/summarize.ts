@@ -44,7 +44,6 @@ const main = async () => {
   const textContent = article?.textContent?.trim();
 
   if (textContent === undefined || textContent === "") {
-    console.log(html.substring(0, 1_000));
     throw new Error(`Could not extract the content of ${url}.`);
   }
 
