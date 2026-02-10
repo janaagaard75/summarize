@@ -1,5 +1,4 @@
-import { JSDOM } from "jsdom";
-import { Readability } from "@mozilla/readability";
+import { getPageText } from "./getPageText.js";
 import { summarizeWithOpenRouter } from "./summarizeWithOpenRouter.js";
 
 const arg1 = process.argv[2];
@@ -30,22 +29,7 @@ if (url === undefined) {
 }
 
 const main = async () => {
-  const response = await fetch(url);
-
-  if (!response.ok) {
-    throw new Error(`Failed to fetch ${url}: ${response.statusText}`);
-  }
-
-  const html = await response.text();
-
-  const dom = new JSDOM(html, { url: url });
-  const reader = new Readability(dom.window.document);
-  const article = reader.parse();
-  const textContent = article?.textContent?.trim();
-
-  if (textContent === undefined || textContent === "") {
-    throw new Error(`Could not extract the content of ${url}.`);
-  }
+  const textContent = await getPageText(url);
 
   const summary = await summarizeWithOpenRouter(
     textContent,
