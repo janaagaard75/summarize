@@ -1,17 +1,8 @@
+import { getInteger } from "./getInteger.js";
 import { getPageText } from "./getPageText.js";
 import { summarizeWithOpenRouter } from "./summarizeWithOpenRouter.js";
 
 const arg1 = process.argv[2];
-
-const getInteger = (value: string | undefined): number | undefined => {
-  const parsed = Number(value);
-
-  if (!Number.isInteger(parsed) || parsed <= 0) {
-    return undefined;
-  }
-
-  return parsed;
-};
 
 const [url, summaryLength] = (() => {
   const summaryLength = getInteger(arg1);
