@@ -13,14 +13,14 @@ const getInteger = (value: string | undefined): number | undefined => {
   return parsed;
 };
 
-const [url, maxLength] = (() => {
-  const maxLength = getInteger(arg1);
+const [url, summaryLength] = (() => {
+  const summaryLength = getInteger(arg1);
 
-  if (maxLength === undefined) {
+  if (summaryLength === undefined) {
     return [arg1, 280] as const;
   }
 
-  return [process.argv[3], maxLength] as const;
+  return [process.argv[3], summaryLength] as const;
 })();
 
 if (url === undefined) {
@@ -33,7 +33,7 @@ const main = async () => {
 
   const summary = await summarizeWithOpenRouter(
     textContent,
-    maxLength,
+    summaryLength,
     "google/gemini-2.5-flash",
   );
 
