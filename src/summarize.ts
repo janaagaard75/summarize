@@ -2,20 +2,17 @@ import { getInteger } from "./getInteger.js";
 import { getPageText } from "./getPageText.js";
 import { summarizeWithOpenRouter } from "./summarizeWithOpenRouter.js";
 
-const arg1 = process.argv[2];
+const summaryLength = getInteger(process.argv[2]);
+if (summaryLength === undefined) {
+  console.error("Please provide a valid summary length as the first argument.");
+  process.exit(1);
+}
 
-const [url, summaryLength] = (() => {
-  const summaryLength = getInteger(arg1);
-
-  if (summaryLength === undefined) {
-    return [arg1, 280] as const;
-  }
-
-  return [process.argv[3], summaryLength] as const;
-})();
-
+const url = process.argv[3];
 if (url === undefined) {
-  console.error("Please provide the URL of the page to summarize.");
+  console.error(
+    "Please provide the URL of the page to summarize as the second argument.",
+  );
   process.exit(1);
 }
 
