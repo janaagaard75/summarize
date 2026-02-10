@@ -1,8 +1,8 @@
-import { getInteger } from "./getInteger.js";
 import { getPageText } from "./getPageText.js";
 import { summarizeWithOpenRouter } from "./summarizeWithOpenRouter.js";
+import { toInteger } from "./toInteger.js";
 
-const summaryLength = getInteger(process.argv[2]);
+const summaryLength = toInteger(process.argv[2]);
 if (summaryLength === undefined) {
   console.error("Please provide a valid summary length as the first argument.");
   process.exit(1);
