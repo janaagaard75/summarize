@@ -1,55 +1,27 @@
-import { JSDOM } from "jsdom";
-import { Readability } from "@mozilla/readability";
+import { getPageMarkdown } from "./getPageMarkdown.js";
 import { summarizeWithOpenRouter } from "./summarizeWithOpenRouter.js";
+import { toInteger } from "./toInteger.js";
 
-const arg1 = process.argv[2];
+const summaryLength = toInteger(process.argv[2]);
+if (summaryLength === undefined) {
+  console.error("Please provide a valid summary length as the first argument.");
+  process.exit(1);
+}
 
-const getInteger = (value: string | undefined): number | undefined => {
-  const parsed = Number(value);
-
-  if (!Number.isInteger(parsed) || parsed <= 0) {
-    return undefined;
-  }
-
-  return parsed;
-};
-
-const [url, maxLength] = (() => {
-  const maxLength = getInteger(arg1);
-
-  if (maxLength === undefined) {
-    return [arg1, 280] as const;
-  }
-
-  return [process.argv[3], maxLength] as const;
-})();
-
+const url = process.argv[3];
 if (url === undefined) {
-  console.error("Please provide the URL of the page to summarize.");
+  console.error(
+    "Please provide the URL of the page to summarize as the second argument.",
+  );
   process.exit(1);
 }
 
 const main = async () => {
-  const response = await fetch(url);
-
-  if (!response.ok) {
-    throw new Error(`Failed to fetch ${url}: ${response.statusText}`);
-  }
-
-  const html = await response.text();
-
-  const dom = new JSDOM(html, { url: url });
-  const reader = new Readability(dom.window.document);
-  const article = reader.parse();
-  const textContent = article?.textContent?.trim();
-
-  if (textContent === undefined || textContent === "") {
-    throw new Error(`Could not extract the content of ${url}.`);
-  }
+  const textContent = await getPageMarkdown(url);
 
   const summary = await summarizeWithOpenRouter(
     textContent,
-    maxLength,
+    summaryLength,
     "google/gemini-2.5-flash",
   );
 

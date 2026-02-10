@@ -2,15 +2,26 @@
   "name": "summarize",
   "packageManager": "bun@1.3.4",
   "scripts": {
-    "build": "bun build --bytecode --compile --minify --sourcemap ./src/summarize.ts --outfile summarize"
+    "build": "bun build --bytecode --compile --minify --sourcemap ./src/summarize.ts --outfile summarize",
+    "test1": "bun run ./src/summarize.ts 300 https://www.dr.dk/nyheder/indland/forskere-aergrer-sig-over-tyveri-af-hvalkaebe",
+    "test2": "bun run ./src/summarize.ts 300 https://campedersen.com/singularity",
+    "test3": "bun run ./src/summarize.ts 300 https://www.bbc.com/news/technology-67212485",
+    "test4": "bun run ./src/summarize.ts 300 https://entire.io/blog/hello-entire-world/",
+    "test5": "bun run ./src/summarize.ts 300 https://www.nature.com/news/2008/080430/full/news.2008.672.html",
+    "test6": "bun run ./src/summarize.ts 300 https://www.infinitelymore.xyz/p/complex-numbers-essential-structure",
+    "test7": "bun run ./src/summarize.ts 300 https://code.idtech.space/fn/hl2",
+    "test8": "bun run ./src/summarize.ts 300 https://theintercept.com/2026/02/10/google-ice-subpoena-student-journalist/",
+    "test9": "bun run ./src/summarize.ts 300 https://github.com/pretzelai/stripe-no-webhooks"
   },
   "type": "module",
   "dependencies": {
     "@mozilla/readability": "^0.6.0",
-    "dotenv": "^17.2.3",
+    "@types/turndown": "^5.0.6",
     "jsdom": "^27.4.0",
     "openai": "^6.15.0",
-    "tsx": "^4.21.0"
+    "puppeteer": "^24.37.2",
+    "tsx": "^4.21.0",
+    "turndown": "^7.2.2"
   },
   "devDependencies": {
     "@types/jsdom": "^27.0.0",
