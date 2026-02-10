@@ -1,4 +1,4 @@
-import { getPageText } from "./getPageText.js";
+import { getPageMarkdown } from "./getPageMarkdown.js";
 import { summarizeWithOpenRouter } from "./summarizeWithOpenRouter.js";
 import { toInteger } from "./toInteger.js";
 
@@ -17,7 +17,7 @@ if (url === undefined) {
 }
 
 const main = async () => {
-  const textContent = await getPageText(url);
+  const textContent = await getPageMarkdown(url);
 
   const summary = await summarizeWithOpenRouter(
     textContent,

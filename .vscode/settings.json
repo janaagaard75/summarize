@@ -1,4 +1,5 @@
 {
+  "cSpell.words": ["networkidle"],
   "editor.codeActionsOnSave": {
     "source.organizeImports": "always"
   },
