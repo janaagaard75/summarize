@@ -7,7 +7,6 @@
   "type": "module",
   "dependencies": {
     "@mozilla/readability": "^0.6.0",
-    "dotenv": "^17.2.3",
     "jsdom": "^27.4.0",
     "openai": "^6.15.0",
     "tsx": "^4.21.0"
