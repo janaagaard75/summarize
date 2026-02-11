@@ -1,4 +1,4 @@
-# Summarize
+# :memo::scissors: Summarize
 
 The `summarize` script returns a summary of the URL provided as a parameter.
 
