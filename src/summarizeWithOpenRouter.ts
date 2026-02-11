@@ -18,11 +18,11 @@ export const summarizeWithOpenRouter = async (
     messages: [
       {
         role: "system",
-        content: `You are a concise news summarizer. IMPORTANT: Your response must be EXACTLY under ${maxLength} characters. No exceptions.`,
+        content: `You are a concise news summarizer. IMPORTANT: Your response must be under ${maxLength} characters. Aim to use as much of the available space as possible (aim for 80-90% of the limit). No exceptions on the character limit.`,
       },
       {
         role: "user",
-        content: `Summarize this news article in 1-2 sentences. Maximum ${maxLength} characters. No line breaks, no markdown. Neutral tone. Same language as the article.\n\nArticle:\n${articleText}`,
+        content: `Summarize this news article in 1-3 sentences. Target: ${Math.round(maxLength * 0.85)} characters (aim for this length, max ${maxLength}). No line breaks, no markdown. Neutral tone. Same language as the article.\n\nArticle:\n${articleText}`,
       },
     ],
     temperature: 0.5,

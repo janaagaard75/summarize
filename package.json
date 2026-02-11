@@ -5,7 +5,7 @@
     "build": "bun build --bytecode --compile --minify --sourcemap ./src/summarize.ts --outfile summarize",
     "test1": "bun run ./src/summarize.ts 300 https://www.dr.dk/nyheder/indland/forskere-aergrer-sig-over-tyveri-af-hvalkaebe",
     "test2": "bun run ./src/summarize.ts 300 https://campedersen.com/singularity",
-    "test3": "bun run ./src/summarize.ts 300 https://www.bbc.com/news/technology-67212485",
+    "test3": "bun run ./src/summarize.ts 300 https://www.bbc.com/future/article/20260210-tiktok-is-tracking-you-even-if-you-dont-use-the-app-heres-how-to-stop-it",
     "test4": "bun run ./src/summarize.ts 300 https://entire.io/blog/hello-entire-world/",
     "test5": "bun run ./src/summarize.ts 300 https://www.nature.com/news/2008/080430/full/news.2008.672.html",
     "test6": "bun run ./src/summarize.ts 300 https://www.infinitelymore.xyz/p/complex-numbers-essential-structure",
@@ -20,6 +20,8 @@
     "jsdom": "^27.4.0",
     "openai": "^6.15.0",
     "puppeteer": "^24.37.2",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
     "tsx": "^4.21.0",
     "turndown": "^7.2.2"
   },

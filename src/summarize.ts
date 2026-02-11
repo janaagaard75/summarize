@@ -25,8 +25,8 @@ const main = async () => {
     "google/gemini-2.5-flash",
   );
 
+  console.log(`Character counts: ${textContent.length} -> ${summary.length}.`);
   console.log(summary);
-  console.log(`Character count: ${summary.length}.`);
 };
 
 main().catch((err) => {
