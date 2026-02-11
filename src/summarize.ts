@@ -17,6 +17,7 @@ if (url === undefined) {
 }
 
 const main = async () => {
+  // Use getPageText or getPageMarkdown.
   const textContent = await getPageText(url);
 
   const summary = await summarizeWithOpenRouter(
