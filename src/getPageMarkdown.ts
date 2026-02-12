@@ -1,20 +1,10 @@
-import puppeteerExtra from "puppeteer-extra";
-import StealthPlugin from "puppeteer-extra-plugin-stealth";
 import TurndownService from "turndown";
-
-puppeteerExtra.use(StealthPlugin());
+import { getHtmlContent } from "./getHtmlContent";
 
 export const getPageMarkdown = async (url: string): Promise<string> => {
-  const browser = await puppeteerExtra.launch();
-  const page = await browser.newPage();
-
-  await page.goto(url, { waitUntil: "networkidle0" });
-
-  const content = await page.content();
-
+  const htmlContent = await getHtmlContent(url);
   const turndownService = new TurndownService();
-  const markdown = turndownService.turndown(content);
+  const markdown = turndownService.turndown(htmlContent);
 
-  await browser.close();
   return markdown;
 };

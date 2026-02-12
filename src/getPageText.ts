@@ -1,16 +1,15 @@
 import { Readability } from "@mozilla/readability";
 import { JSDOM } from "jsdom";
+import puppeteerExtra from "puppeteer-extra";
+import StealthPlugin from "puppeteer-extra-plugin-stealth";
+import { getHtmlContent } from "./getHtmlContent";
+
+puppeteerExtra.use(StealthPlugin());
 
 export const getPageText = async (url: string): Promise<string> => {
-  const response = await fetch(url);
+  const htmlContent = await getHtmlContent(url);
 
-  if (!response.ok) {
-    throw new Error(`Failed to fetch ${url}: ${response.statusText}`);
-  }
-
-  const html = await response.text();
-
-  const dom = new JSDOM(html, { url: url });
+  const dom = new JSDOM(htmlContent, { url: url });
   const reader = new Readability(dom.window.document);
   const article = reader.parse();
   const textContent = article?.textContent?.trim();
